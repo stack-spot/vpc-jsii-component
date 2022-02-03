@@ -178,6 +178,80 @@ export class MyStack extends Stack {
 cd vpc-env-jsii-component
 npm install
 ```
+### IAM permissions
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "cloudformation:Describe*",
+                "cloudformation:List*",
+                "cloudformation:Get*"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::cdktoolkit-stagingbucket-*",
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "ssm:GetParameters"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        },
+        {
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateTags",
+                "ec2:CreateVpc",
+                "ec2:CreateSubnet",
+                "ec2:CreateRouteTable",
+                "ec2:CreateRoute",
+                "ec2:CreateInternetGateway",
+                "ec2:CreateNatGateway",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeNatGateways",
+                "ec2:DescribeAddresses",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeRouteTables",
+                "ec2:DescribeAvailabilityZones",
+                "ec2:DescribeInternetGateways",
+                "ec2:AttachInternetGateway",
+                "ec2:allocateAddress",
+                "ec2:AssociateRouteTable",
+                "ec2:ModifyVpcAttribute",
+                "ec2:ModifySubnetAttribute",
+                "ec2:ReplaceRoute",
+                "ec2:DeleteRoute",
+                "ec2:DeleteVpc",
+                "ec2:DeleteTags",
+                "ec2:DeleteSubnet",
+                "ec2:DeleteInternetGateway",
+                "ec2:DeleteRouteTable",
+                "ec2:DetachInternetGateway",
+                "ec2:DeleteNatGateway",
+                "ec2:releaseAddress",
+                "ec2:DisassociateRouteTable"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+Usage:
+
+```
+cdk bootstrap --public-access-block-configuration false --trust <account-id> --cloudformation-execution-policies arn:aws:iam::<account-id>:policy/<policy-name> aws://<account-id>/<region>
+
+cdk deploy
+```
 
 You are done! Happy coding!
 
