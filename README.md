@@ -1,5 +1,13 @@
 # vpc-env-jsii-component
 
+[![aws-cdk][badge-aws-cdk]][aws-cdk]
+[![jsii][badge-jsii]][jsii]
+[![npm-version][badge-npm-version]][npm-package]
+[![nuget-version][badge-nuget-version]][nuget-package]
+[![npm-downloads][badge-npm-downloads]][npm-package]
+[![nuget-downloads][badge-nuget-downloads]][nuget-package]
+[![license][badge-license]][license]
+
 Component to create a VPC.
 
 ## How to use
@@ -11,7 +19,7 @@ Below are all languages supported by the AWS CDK.
 Install the dependency:
 
 ```sh
-dotnet add package OrangeStack.Components.Env.Vpc
+dotnet add package StackSpot.Env.Vpc
 ```
 
 Import the construct into your project, for example:
@@ -20,7 +28,7 @@ Import the construct into your project, for example:
 using Amazon.CDK;
 using Amazon.CDK.AWS.EC2;
 using Constructs;
-using OrangeStack.Components.Env.Vpc;
+using StackSpot.Env.Vpc;
 
 namespace MyStack
 {
@@ -61,7 +69,7 @@ Not yet supported.
 Install the dependency:
 
 ```sh
-npm install --save @orange-stack/vpc-env-component
+npm install --save @stackspot/cdk-env-vpc
 ```
 
 Import the construct into your project, for example:
@@ -69,7 +77,7 @@ Import the construct into your project, for example:
 ```javascript
 const { Stack } = require('aws-cdk-lib');
 const { SubnetType } = require('aws-cdk-lib/aws-ec2');
-const { VpcEnvComponent } = require('@orange-stack/vpc-env-component');
+const { VpcEnvComponent } = require('@stackspot/cdk-env-vpc');
 
 class MyStack extends Stack {
   constructor(scope, id, props) {
@@ -99,7 +107,7 @@ Not yet supported.
 Install the dependency:
 
 ```sh
-npm install --save @orange-stack/vpc-env-component
+npm install --save @stackspot/cdk-env-vpc
 ```
 
 Import the construct into your project, for example:
@@ -108,7 +116,7 @@ Import the construct into your project, for example:
 import { Stack, StackProps } from 'aws-cdk-lib';
 import { SubnetType } from 'aws-cdk-lib/aws-ec2';
 import { Construct } from 'constructs';
-import { VpcEnvComponent } from '@orange-stack/vpc-env-component';
+import { VpcEnvComponent } from '@stackspot/cdk-env-vpc';
 
 export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -178,9 +186,12 @@ export class MyStack extends Stack {
 cd vpc-env-jsii-component
 npm install
 ```
-### IAM permissions
 
-```
+You are done! Happy coding!
+
+## IAM Policy
+
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -247,18 +258,32 @@ npm install
 
 Usage:
 
-```
-cdk bootstrap --public-access-block-configuration false --trust <account-id> --cloudformation-execution-policies arn:aws:iam::<account-id>:policy/<policy-name> aws://<account-id>/<region>
+```sh
+cdk bootstrap \
+  --public-access-block-configuration false \
+  --trust <account-id> \
+  --cloudformation-execution-policies arn:aws:iam::<account-id>:policy/<policy-name> \
+  aws://<account-id>/<region>
 
 cdk deploy
 ```
 
-You are done! Happy coding!
-
+[aws-cdk]: https://aws.amazon.com/cdk
 [aws-cdk-subnet-configuration]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.SubnetConfiguration.html
 [aws-cdk-subnet-selection]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.SubnetSelection.html
 [aws-cdk-subnet-type]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.SubnetType.html
 [aws-cdk-ivpc]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.IVpc.html
+[badge-aws-cdk]: https://img.shields.io/github/package-json/dependency-version/stack-spot/vpc-env-jsii-component/aws-cdk-lib
+[badge-jsii]: https://img.shields.io/github/package-json/dependency-version/stack-spot/vpc-env-jsii-component/dev/jsii
+[badge-license]: https://img.shields.io/github/license/stack-spot/vpc-env-jsii-component
+[badge-npm-downloads]: https://img.shields.io/npm/dt/@stackspot/cdk-env-vpc?label=downloads%20%28npm%29
+[badge-npm-version]: https://img.shields.io/npm/v/@stackspot/cdk-env-vpc
+[badge-nuget-downloads]: https://img.shields.io/nuget/dt/StackSpot.Env.Vpc?label=downloads%20%28NuGet%29
+[badge-nuget-version]: https://img.shields.io/nuget/vpre/StackSpot.Env.Vpc
 [editorconfig]: https://editorconfig.org/
 [git]: https://git-scm.com/downloads
+[jsii]: https://aws.github.io/jsii/
+[license]: https://github.com/stack-spot/vpc-env-jsii-component/blob/main/LICENSE
 [nodejs]: https://nodejs.org/en/download/
+[npm-package]: https://www.npmjs.com/package/@stackspot/cdk-env-vpc
+[nuget-package]: https://www.nuget.org/packages/StackSpot.Env.Vpc
