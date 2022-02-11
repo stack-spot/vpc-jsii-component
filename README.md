@@ -172,24 +172,7 @@ export class MyStack extends Stack {
 | subnets | [SubnetSelection][aws-cdk-subnet-selection] | Subnets used on the VPC. |
 | vpc     | [IVpc][aws-cdk-ivpc]                        | VPC to be used.          |
 
-## Development
-
-### Prerequisites
-
-- [EditorConfig][editorconfig] (Optional)
-- [Git][git]
-- [Node.js 16][nodejs]
-
-### Setup
-
-```sh
-cd vpc-env-jsii-component
-npm install
-```
-
-You are done! Happy coding!
-
-## IAM Policy
+## IAM Least privilege
 
 ```json
 {
@@ -267,6 +250,23 @@ cdk bootstrap \
 
 cdk deploy
 ```
+
+## Development
+
+### Prerequisites
+
+- [EditorConfig][editorconfig] (Optional)
+- [Git][git]
+- [Node.js 16][nodejs]
+
+### Setup
+
+```sh
+cd vpc-env-jsii-component
+npm install
+```
+
+You are done! Happy coding!
 
 [aws-cdk]: https://aws.amazon.com/cdk
 [aws-cdk-subnet-configuration]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.SubnetConfiguration.html
