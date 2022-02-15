@@ -1,6 +1,6 @@
 {
   "name": "@stackspot/cdk-env-vpc",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Component to create a VPC.",
   "keywords": [
     "aws-cdk",
