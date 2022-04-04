@@ -212,7 +212,7 @@ npm install
 [aws-cdk-ec2-subnet-configuration]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.SubnetConfiguration.html
 [aws-cdk-ec2-subnet-selection]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.SubnetSelection.html
 [aws-cdk-ec2-subnet-type]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.SubnetType.html
-[badge-aws-cdk]: https://img.shields.io/github/package-json/dependency-version/stack-spot/vpc-jsii-component/aws-cdk-lib
+[badge-aws-cdk]: https://img.shields.io/github/package-json/dependency-version/stack-spot/vpc-jsii-component/dev/aws-cdk-lib
 [badge-jsii]: https://img.shields.io/github/package-json/dependency-version/stack-spot/vpc-jsii-component/dev/jsii
 [badge-license]: https://img.shields.io/github/license/stack-spot/vpc-jsii-component
 [badge-npm-downloads]: https://img.shields.io/npm/dt/@stackspot/cdk-vpc?label=downloads%20%28npm%29
