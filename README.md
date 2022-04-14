@@ -138,12 +138,44 @@ export class MyStack extends Stack {
 | subnetsOnePerAz          | boolean                               | If true, return at most one subnet per AZ.                                       |
 | subnetsType              | [SubnetType][aws-cdk-ec2-subnet-type] | Type of subnet to be used. Default: [SubnetType.PUBLIC][aws-cdk-ec2-subnet-type] |
 
+## Another Props
+
+### ApiVpcEndpointCreateProps
+
+| Name            | Type                                  | Description                                                              |
+| --------------- | ------------------------------------- | ------------------------------------------------------------------------ |
+| stackName       | string                                | The name of the Stack                                                    |
+| securityGroupId | string                                | The identifier of the security id to be used on VPC Endpoint. (Optional) |
+| subnetType      | [SubnetType][aws-cdk-ec2-subnet-type] | The type of subnet to use.                                               |
+| port            | number                                | The port to be used by service linked to VPC Endpoint                    |
+| vpc             | [IVpc][aws-cdk-ec2-ivpc]              | The VPC to use.                                                          |
+
 ## Properties
 
 | Name                | Type                                            | Description              |
 | ------------------- | ----------------------------------------------- | ------------------------ |
 | subnets             | [SubnetSelection][aws-cdk-ec2-subnet-selection] | Subnets used on the VPC. |
 | virtualPrivateCloud | [IVpc][aws-cdk-ec2-ivpc]                        | VPC to be used.          |
+
+## Methods
+
+| Name                                      | Description            |
+| ----------------------------------------- | ---------------------- |
+| static createApiVpcEndpoint(scope, props) | Create a VPC Endpoint. |
+
+### createApiVpcEndpoint(scope, vpc, props)
+
+```typescript
+public static createApiVpcEndpoint(scope: Construct,vpc: IVpc,props: ApiVpcEndpointCreateProps)
+```
+
+_Parameters_
+
+- **scope** [Construct][aws-cdk-construct]
+- **scope** [IVpc][aws-cdk-ec2-ivpc]
+- **props** [ApiVpcEndpointCreateProps](#apivpcendpointcreateprops)
+
+Create a VPC Endpoint from an existing VPC.
 
 ## IAM Least privilege
 
@@ -208,6 +240,7 @@ npm install
 ```
 
 [aws-cdk]: https://aws.amazon.com/cdk
+[aws-cdk-construct]: https://docs.aws.amazon.com/cdk/api/v2/docs/constructs.Construct.html
 [aws-cdk-ec2-ivpc]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.IVpc.html
 [aws-cdk-ec2-subnet-configuration]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.SubnetConfiguration.html
 [aws-cdk-ec2-subnet-selection]: https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_ec2.SubnetSelection.html

@@ -1,5 +1,10 @@
 import {
+  InterfaceVpcEndpoint,
+  ISecurityGroup,
   IVpc,
+  Peer,
+  Port,
+  SecurityGroup,
   SubnetConfiguration,
   SubnetFilter,
   SubnetSelection,
@@ -80,6 +85,31 @@ export interface VpcProps {
 }
 
 /**
+ * API VPC Endpoint method props.
+ */
+export interface ApiVpcEndpointCreateProps {
+  /**
+   * Stack name.
+   */
+  readonly stackName: string;
+
+  /**
+   * Optional security group.
+   */
+  readonly securityGroupId?: string;
+
+  /**
+   * The type of subnet to use.
+   */
+  readonly subnetType: SubnetType;
+
+  /**
+   * Endpoint port number.
+   */
+  readonly port: number;
+}
+
+/**
  * Component to create a VPC.
  */
 export class Vpc extends Construct {
@@ -105,19 +135,13 @@ export class Vpc extends Construct {
     super(scope, id);
 
     if (props.vpcId) {
-      this.virtualPrivateCloud = AwsVpc.fromLookup(
-        this,
-        `Vpc${props.vpcName}`,
-        {
-          isDefault:
-            typeof props.vpcDefault === 'boolean'
-              ? props.vpcDefault
-              : undefined,
-          region: props.vpcRegion,
-          vpcId: props.vpcId,
-          vpcName: props.vpcName,
-        }
-      );
+      this.virtualPrivateCloud = AwsVpc.fromLookup(this, props.vpcName, {
+        isDefault:
+          typeof props.vpcDefault === 'boolean' ? props.vpcDefault : undefined,
+        region: props.vpcRegion,
+        vpcId: props.vpcId,
+        vpcName: props.vpcName,
+      });
     } else {
       this.virtualPrivateCloud = new AwsVpc(this, `Vpc${props.vpcName}`, {
         cidr: props.vpcCidr || '10.0.0.0/16',
@@ -138,6 +162,49 @@ export class Vpc extends Construct {
         : undefined,
       subnetGroupName: props.subnetsGroupName,
       subnetType: props.subnetsType,
+    });
+  }
+
+  /**
+   * Create Vpc endpoint for Api Gateway.
+   *
+   * @param {Construct} scope The construct within which this construct is defined.
+   * @param {IVpc} vpc The Interface IVpc.
+   * @param {ApiVpcEndpointCreateProps} props API VPC Endpoint props.
+   */
+  public static createApiVpcEndpoint(
+    scope: Construct,
+    vpc: IVpc,
+    props: ApiVpcEndpointCreateProps
+  ) {
+    let securityGroup: ISecurityGroup;
+    if (props.securityGroupId) {
+      securityGroup = SecurityGroup.fromSecurityGroupId(
+        scope,
+        'GetExistingSG',
+        props.securityGroupId
+      );
+    } else {
+      securityGroup = new SecurityGroup(scope, `ApiSG${props.stackName}`, {
+        vpc,
+        allowAllOutbound: true,
+        securityGroupName: `sg_apivpce_${props.stackName}`,
+      });
+      securityGroup.addIngressRule(
+        Peer.ipv4(vpc.vpcCidrBlock),
+        Port.tcp(props.port)
+      );
+    }
+
+    return new InterfaceVpcEndpoint(scope, `IVpce${props.stackName}`, {
+      vpc,
+      service: {
+        name: `com.amazonaws.${vpc.stack.region}.execute-api`,
+        port: props.port,
+      },
+      subnets: { subnetType: props.subnetType },
+      privateDnsEnabled: true,
+      securityGroups: [securityGroup],
     });
   }
 }
