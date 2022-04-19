@@ -172,7 +172,7 @@ public static createApiVpcEndpoint(scope: Construct,vpc: IVpc,props: ApiVpcEndpo
 _Parameters_
 
 - **scope** [Construct][aws-cdk-construct]
-- **scope** [IVpc][aws-cdk-ec2-ivpc]
+- **vpc** [IVpc][aws-cdk-ec2-ivpc]
 - **props** [ApiVpcEndpointCreateProps](#apivpcendpointcreateprops)
 
 Create a VPC Endpoint from an existing VPC.
